@@ -1,0 +1,33 @@
+<section>
+  <modal-header>
+    <h2>
+      {{ metricTitle }} of
+      {{ selectedData.coalition }} -
+      {{ selectedData.supplychain }} in
+      {{ selectedData.month }}
+      {{ selectedData.year }}
+    </h2>
+  </modal-header>
+  <modal-body>
+    <table class="table">
+      <tr>
+        <th>Factory Name</th>
+        <th>Brand</th>
+        <th ng-repeat="header in getHeader(selectedMetric)">
+          {{ header }}
+        </th>
+      </tr>
+      <tr ng-hide="isNa(data, selectedMetric)" ng-repeat="data in dataset | orderBy: setSort(selectedMetric) ">
+        <td>{{data.factoryname}}</td>
+        <td>{{data.brand}}</td>
+        <td ng-repeat="(key, val) in getSelectedMetric(data, selectedMetric) track by $index"
+            ng-class="format.getIndicator(data, selectedMetric, key)">
+          {{ val }}
+        </td>
+      </tr>
+    </table>
+  </modal-body>
+  <modal-footer>
+    <button class="btn btn-primary" ng-click="cancel()">Close</button>
+  </modal-footer>
+</section>

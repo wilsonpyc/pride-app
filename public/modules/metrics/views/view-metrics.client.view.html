@@ -1,0 +1,126 @@
+<section data-ng-controller="MetricsController as metricsCtrl">
+  <!--navbar-->
+  <!-- <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="menuBtnWrapper">
+      <button class="btn text-center" ng-click="metricsCtrl.modalFilter('sm')">
+        <i class="glyphicon glyphicon-filter"></i>
+        FILTERS
+      </button>
+      <button class="btn pull-right" ng-click="metricsCtrl.modalInsert('lg')">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+      <button class="btn pull-right">
+        <a href="/#!/metrics/report">
+          <i class="glyphicon glyphicon-equalizer"></i>
+        </a>
+      </button>
+    </div>
+  </div> -->
+  <div class="menuBtnWrapper">
+    <button class="btn text-center" ng-click="metricsCtrl.modalFilter('sm')">
+      <i class="glyphicon glyphicon-filter"></i>
+      FILTERS
+    </button>
+    <button class="btn pull-right" ng-click="metricsCtrl.modalInsert('lg')">
+      <i class="glyphicon glyphicon-plus"></i>
+    </button>
+    <button class="btn pull-right">
+      <a href="/#!/metrics/report">
+        <i class="glyphicon glyphicon-equalizer"></i>
+      </a>
+    </button>
+  </div>
+  <div>
+    <button class="btn pull-right" ng-click="metricsCtrl.loadAndRefresh()">
+      <i class="glyphicon glyphicon-remove-circle"></i>
+      Clear
+    </button>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>FFC</td>
+          <td>Factory Name</td>
+          <td>Coalition</td>
+          <td>Supply Chain</td>
+          <td>Brand</td>
+          <td>Product Category</td>
+          <td>Region</td>
+          <td>Year</td>
+          <td>Month</td>
+          <td>Factory-Major Defects Audited-OQL</td>
+          <td>Factory-Major Defects Found-OQL</td>
+          <td>Factory-Labelling and Packaging Audited</td>
+          <td>Factory-Labelling and Packaging Found</td>
+          <td>Factory-Measurement Audited</td>
+          <td>Factory-Measurement Found</td>
+          <td>Factory-Major Defects Audited-SQL</td>
+          <td>Factory-Major Defects Found-SQL</td>
+          <td>Factory-First Pass Audited</td>
+          <td>Factory-First Pass Passed</td>
+          <td>DC-Major Defects Audited</td>
+          <td>DC-Major Defects Found</td>
+          <td>DC-Labelling and Packaging Audited</td>
+          <td>DC-Labelling and Packaging Found</td>
+          <td>DC-Measurement Audited</td>
+          <td>DC-Measurement Found</td>
+          <td>DC-Customization Audited</td>
+          <td>DC-Customization Found</td>
+          <td>DC-Rework Total</td>
+          <td>DC-Rework Vendor Chargebacks</td>
+          <td>DC-Rework Internal Chargebacks</td>
+          <td>DC-VAS Compliance</td>
+          <td>DC-Claims Units Recevied</td>
+          <td>DC-Claims Units Returned</td>
+          <td>DC-Keyaccounts Chargebacks</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="metric in metrics">
+          <td>{{metric.ffc}}</td>
+          <td>{{metric.factoryname}}</td>
+          <td>{{metric.coalition}}</td>
+          <td>{{metric.supplychain}}</td>
+          <td>{{metric.brand}}</td>
+          <td>{{metric.productcategory}}</td>
+          <td>{{metric.region}}</td>
+          <td>{{metric.year}}</td>
+          <td>{{metric.month}}</td>
+          <td>{{metric.metrics.factory.majorDefectsOql.audited}}</td>
+          <td>{{metric.metrics.factory.majorDefectsOql.defects}}</td>
+          <td>{{metric.metrics.factory.packagingOql.audited}}</td>
+          <td>{{metric.metrics.factory.packagingOql.defects}}</td>
+          <td>{{metric.metrics.factory.fitOql.audited}}</td>
+          <td>{{metric.metrics.factory.fitOql.defects}}</td>
+          <td>{{metric.metrics.factory.majorDefectsSql.audited}}</td>
+          <td>{{metric.metrics.factory.majorDefectsSql.defects}}</td>
+          <td>{{metric.metrics.factory.firstPass.audited}}</td>
+          <td>{{metric.metrics.factory.firstPass.passed}}</td>
+          <td>{{metric.metrics.dc.majorDefectsOql.audited}}</td>
+          <td>{{metric.metrics.dc.majorDefectsOql.defects}}</td>
+          <td>{{metric.metrics.dc.packagingOql.audited}}</td>
+          <td>{{metric.metrics.dc.packagingOql.defects}}</td>
+          <td>{{metric.metrics.dc.fitOql.audited}}</td>
+          <td>{{metric.metrics.dc.fitOql.defects}}</td>
+          <td>{{metric.metrics.dc.customization.audited}}</td>
+          <td>{{metric.metrics.dc.customization.defects}}</td>
+          <td>{{metric.metrics.dc.rework.total}}</td>
+          <td>{{metric.metrics.dc.rework.vendorChargeback}}</td>
+          <td>{{metric.metrics.dc.internalChargebacks}}</td>
+          <td>{{metric.metrics.dc.vasCompliance}}</td>
+          <td>{{metric.metrics.dc.claims.received}}</td>
+          <td>{{metric.metrics.dc.claims.returned}}</td>
+          <td>{{metric.metrics.dc.keyAccountsChargebacks}}</td>
+          <td>
+            <button class="btn btn-info glyphicon glyphicon-pencil" ng-click="metricsCtrl.modalUpdate('lg', metric._id)">
+            </button>
+            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="metricsCtrl.delete(metric._id)">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

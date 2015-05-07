@@ -1,0 +1,69 @@
+.content {
+	margin-top: 55px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+body {
+	background-color: #eeeeee;
+}
+.navbar-right {
+	margin-right: -5px;
+}
+
+.top-section {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  background: url(../img/brand/yosemite.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 94vh;
+}
+.welcome_box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	color: white;
+}
+.pride-logo{
+	background-image: url(../img/brand/pride-logo.jpg);
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 130px;
+}
+a.button_green {
+  background-color: #03d7ab;
+  border: 2px solid #03d7ab;
+  color: #fff;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 11px 20px 10px 20px;
+  margin: 10px 10px 20px 0;
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px 5px;
+  border-radius: 5px 5px;
+  transition: all .50s ease-in-out;
+  -moz-transition: all .50s ease-in-out;
+  -webkit-transition: all .50s ease-in-out;
+}
+.align_center{
+  text-align: center;
+}

@@ -1,0 +1,66 @@
+<!--modal-->
+<section data-ng-controller="MetricsController as metricsCtrl">
+  <div class="modal-header">
+    <h3 class="modal-title">Filter</h3>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table id="menuTable">
+        <tr>
+          <td>
+            <label>Year:</label>
+          </td>
+          <td>
+            <select ng-options="metric.year as metric.year for metric in metrics | unique: 'year' " ng-model="selected.year">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Month:</label>
+          </td>
+          <td>
+            <select ng-options="metric.month as metric.month for metric in metrics | unique: 'month' " ng-model="selected.month">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Coalition:</label>
+          </td>
+          <td>
+            <select ng-options="metric.coalition as metric.coalition for metric in metrics | unique: 'coalition' " ng-model="selected.coalition">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Supply Chain:</label>
+          </td>
+          <td>
+            <select ng-options="metric.supplychain as metric.supplychain for metric in metrics | unique: 'supplychain' " ng-model="selected.supplychain">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Brand:</label>
+          </td>
+          <td>
+            <select ng-options="metric.brand as metric.brand for metric in metrics | unique: 'brand' " ng-model="selected.brand">
+              <option value=""></option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" ng-click="applyFilter()">Apply</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</section>

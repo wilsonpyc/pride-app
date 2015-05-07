@@ -1,0 +1,155 @@
+<section data-ng-controller="MetricsCreateController as metricCreateCtrl">
+  <div class="modal-header">
+    <h3 class="modal-title">New entry</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <tbody>
+        <tr> <!-- FFC Name -->
+          <td>
+            <input class="form-control" placeholder="FFC" ng-model="metricCreateCtrl.ffc"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Factory Name" ng-model="metricCreateCtrl.factoryname"></input>
+          </td>
+        </tr>
+        <tr> <!-- Coalition SupplyChain Brand -->
+          <td>
+            <input class="form-control" placeholder="Coalition" ng-model="metricCreateCtrl.coalition"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Supply Chain" ng-model="metricCreateCtrl.supplychain"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Brand" ng-model="metricCreateCtrl.brand"></input>
+          </td>
+        </tr>
+        <tr> <!-- Year Month -->
+          <td>
+            <input class="form-control" placeholder="Year" ng-model="metricCreateCtrl.year"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Month" ng-model="metricCreateCtrl.month"></input>
+          </td>
+        </tr>
+        <tr> <!-- Factory Major Defects OQL -->
+          <td>
+            <input class="form-control" placeholder="Factory Major Defects Audited OQL" ng-model="metricCreateCtrl.factory_majorDefectsOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Factory Major Defects Found OQL" ng-model="metricCreateCtrl.factory_majorDefectsOql_defects"></input>
+          </td>
+        </tr>
+        <tr> <!-- Factory Labelling and Packaging -->
+          <td>
+            <input class="form-control" placeholder="Labelling and Packaging Audited" ng-model="metricCreateCtrl.factory_packagingOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Labelling and Packaging Defects" ng-model="metricCreateCtrl.factory_packagingOql_defects"></input>
+          </td>
+        </tr>
+        <tr>  <!-- Factory Measurement -->
+          <td>
+            <input class="form-control" placeholder="Meansurement Audited" ng-model="metricCreateCtrl.factory_fitOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Meansurement Defects" ng-model="metricCreateCtrl.factory_fitOql_defects"></input>
+          </td>
+        </tr>
+        <tr>  <!-- Factory Major Defects SQL -->
+          <td>
+            <input class="form-control" placeholder="Major Defects Audited SQL" ng-model="metricCreateCtrl.factory_majorDefectsSql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Major Defects Found SQL" ng-model="metricCreateCtrl.factory_majorDefectsSql_defects"></input>
+          </td>
+        </tr>
+        <tr>  <!-- First Pass -->
+          <td>
+            <input class="form-control" placeholder="First Pass Audited" ng-model="metricCreateCtrl.factory_firstPass_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="First Pass Passed" ng-model="metricCreateCtrl.factory_firstPass_passed"></input>
+          </td>
+        </tr>
+        <tr>  <!-- Process Audit -->
+          <td>
+            <input class="form-control" placeholder="Process Audit Score" ng-model="metricCreateCtrl.factory_processAudit_score"></input>
+          </td>
+          <td>
+            <input class="form-control" type="date" placeholder="Process Audit Date" ng-model="metricCreateCtrl.factory_processAudit_date"></input>
+          </td>
+        </tr>
+        <tr> <!-- DC Major Defects OQL -->
+          <td>
+            <input class="form-control" placeholder="DC Major Defects Audited" ng-model="metricCreateCtrl.dc_majorDefectsOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="DC Major Defects Found" ng-model="metricCreateCtrl.dc_majorDefectsOql_defects"></input>
+          </td>
+        </tr>
+        <tr> <!-- DC Labelling and Packaging -->
+          <td>
+            <input class="form-control" placeholder="DC Labelling and Packaging Audited" ng-model="metricCreateCtrl.dc_packagingOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="DC Labelling and Packaging Found" ng-model="metricCreateCtrl.dc_packagingOql_defects"></input>
+          </td>
+        </tr>
+        <tr> <!-- DC Measurement -->
+          <td>
+            <input class="form-control" placeholder="DC Measurement Audited" ng-model="metricCreateCtrl.dc_fitOql_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="DC Measurement Defects" ng-model="metricCreateCtrl.dc_fitOql_defects"></input>
+          </td>
+        </tr>
+        <tr> <!-- Customization -->
+          <td>
+            <input class="form-control" placeholder="Customization audited" ng-model="metricCreateCtrl.dc_customization_audited"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Customization defects" ng-model="metricCreateCtrl.dc_customization_defects"></input>
+          </td>
+        </tr>
+        <tr> <!-- Rework -->
+          <td>
+            <input class="form-control" placeholder="Rework total" ng-model="metricCreateCtrl.dc_rework_total"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Rework Vednor Chargeback" ng-model="metricCreateCtrl.dc_rework_vendorChargeback"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Internal Chargebacks" ng-model="metricCreateCtrl.dc_internalChargebacks"></input>
+          </td>
+        </tr>
+        <tr> <!-- vasCompliance Warranty Claim -->
+          <td>
+            <input class="form-control" placeholder="VAS Compliance" ng-model="metricCreateCtrl.dc_vasCompliance"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Warranty Claims" ng-model="metricCreateCtrl.dc_warrantyClaims"></input>
+          </td>
+        </tr>
+        <tr> <!-- Claims -->
+          <td>
+            <input class="form-control" placeholder="Claims Units Received" ng-model="metricCreateCtrl.dc_claims_received"></input>
+          </td>
+          <td>
+            <input class="form-control" placeholder="Claims Units Returned" ng-model="metricCreateCtrl.dc_claims_returned"></input>
+          </td>
+        </tr>
+        <tr> <!-- KeyAccounts Chargebacks -->
+          <td>
+            <input class="form-control" placeholder="KeyAccounts Chargebacks" ng-model="metricCreateCtrl.dc_keyAccountsChargebacks"></input>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <button class="btn btn-primary pull-right" ng-click="metricCreateCtrl.create(); addMetric()">
+        Add
+      </button>
+    </div>
+  </div>
+</section>

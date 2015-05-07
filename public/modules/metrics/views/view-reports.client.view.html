@@ -1,0 +1,51 @@
+<section data-ng-controller="MetricsReportController as metricsReportCtrl">
+  <div>
+    <select ng-model="selected.year">
+      <option value=""></option>
+      <option value="2015">2015</option>
+      <option value="2014">2014</option>
+    </select>
+    <select ng-model="selected.month">
+      <option value=""></option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+    </select>
+    <select ng-model="selected.coalition">
+      <option value=""></option>
+      <option value="Jeanswear">Jeanswear</option>
+      <option value="Imagewear">Imagewear</option>
+      <option value="Footwear">Footwear</option>
+      <option value="Outdoor">Outdoor</option>
+      <option value="Sportswear">Sportswear</option>
+      <option value="Contemporary">Contemporary</option>
+    </select>
+    <button class="btn btn-primary" ng-click="getReport(selected)">OK</button>
+  </div>
+  <div class="reportsContainer">
+    <!-- Headers -->
+    <div class="panel panel-default card">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        Year: {{selected.year}}
+        Month: {{selected.month}}
+        Coalition: {{selected.coalition}}
+      </div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Pillar</th>
+          <th>Name</th>
+        </tr>
+        <tr ng-repeat-start="(key, val) in headers ">
+            <td rowspan="{{val.length}}">{{getHeader(key)}}</td>
+            <td>{{val[0]}}</td>
+        </tr>
+        <tr ng-repeat-end ng-repeat="value in val.slice(1)">
+            <td>{{value}}</td>
+        </tr>
+      </table>
+    </div>
+    <!-- Reports -->
+    <report-card dataset='dataset' get-metric='getMetric' format='format' modal-drilldown='modalDrilldown'></report-card>
+  </div>
+</section>
