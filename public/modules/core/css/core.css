@@ -25,7 +25,7 @@ body {
   position: relative;
   width: 100%;
   z-index: 1;
-  background: url(../img/brand/yosemite.jpg);
+  background-image: url(/modules/core/img/brand/yosemite.jpg);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -43,7 +43,7 @@ body {
 	color: white;
 }
 .pride-logo{
-	background-image: url(../img/brand/pride-logo.jpg);
+	background-image: url(/modules/core/img/brand/pride-logo.jpg);
 	background-repeat: no-repeat;
 	height: 20px;
 	width: 130px;
