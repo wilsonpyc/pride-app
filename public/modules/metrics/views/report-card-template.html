@@ -1,4 +1,4 @@
-<div class="panel panel-default card" ng-repeat="data in dataset | unique: 'coalition' ">
+<div class="panel panel-default card" ng-repeat="data in dataset | unique: 'coalition' | orderBy: 'coalitionOrder' ">
   <!-- Default panel contents -->
   <div class="panel-heading">
     {{ getMetric.coalition(data) }}
@@ -6,7 +6,7 @@
   <!-- Table -->
   <table class="table report">
     <tr>
-      <th ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}">
+      <th ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'">
         <div class="cell" >
           {{ getMetric.supplychain(data) }}
         </div>
@@ -14,14 +14,14 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder' "
         ng-class="format.getIndicator.majorDefectsOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'majorDefectsOqlRate')">
         {{ getMetric.majorDefectsOqlRate(data) }}
       </td>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.packagingOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'packagingOqlRate')">
         {{ getMetric.packagingOqlRate(data) }}
@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.fitOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'fitOqlRate')">
         {{ getMetric.fitOqlRate(data) }}
@@ -37,7 +37,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcMajorDefectsOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'dcMajorDefectsOqlRate')">
         {{ getMetric.dcMajorDefectsOqlRate(data) }}
@@ -45,7 +45,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcPackagingOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'dcPackagingOqlRate')">
         {{ getMetric.dcPackagingOqlRate(data) }}
@@ -53,7 +53,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcFitOqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'dcFitOqlRate')">
         {{ getMetric.dcFitOqlRate(data) }}
@@ -61,7 +61,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcCustomizationRate(data)"
         ng-click="modalDrilldown('lg', data, 'dcCustomizationRate')">
         {{ getMetric.dcCustomizationRate(data) }}
@@ -69,7 +69,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.majorDefectsSqlRate(data)"
         ng-click="modalDrilldown('lg', data, 'majorDefectsSqlRate')">
         {{ getMetric.majorDefectsSqlRate(data) }}
@@ -77,7 +77,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.firstPassRate(data)"
         ng-click="modalDrilldown('lg', data, 'firstPassRate')">
         {{ getMetric.firstPassRate(data) }}
@@ -85,7 +85,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.processAuditScore(data)"
         ng-click="modalDrilldown('lg', data, 'processAuditScore')">
         {{ getMetric.processAuditScore(data) }}
@@ -93,7 +93,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcReworkTotal(data)"
         ng-click="modalDrilldown('lg', data, 'dcReworkTotal')">
         {{ getMetric.dcReworkTotal(data) }}
@@ -101,7 +101,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcInternalChargebacks(data)"
         ng-click="modalDrilldown('lg', data, 'dcInternalChargebacks')">
         {{ getMetric.dcInternalChargebacks(data) }}
@@ -109,7 +109,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcVasCompliance(data)"
         ng-click="modalDrilldown('lg', data, 'dcVasCompliance')">
         {{ getMetric.dcVasCompliance(data) }}
@@ -117,7 +117,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcWarrantyClaims(data)"
         ng-click="modalDrilldown('lg', data, 'dcWarrantyClaims')">
         {{ getMetric.dcWarrantyClaims(data) }}
@@ -125,7 +125,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcClaimsRate(data)"
         ng-click="modalDrilldown('lg', data, 'dcClaimsRate')">
         {{ getMetric.dcClaimsRate(data) }}
@@ -133,7 +133,7 @@
     </tr>
     <tr>
       <td
-        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)}"
+        ng-repeat="data in dataset | filter: {coalition: getMetric.coalition(data)} | orderBy: 'supplyChainOrder'"
         ng-class="format.getIndicator.dcKeyAccountsChargebacks(data)"
         ng-click="modalDrilldown('lg', data, 'dcKeyAccountsChargebacks')">
         {{ getMetric.dcKeyAccountsChargebacks(data) }}

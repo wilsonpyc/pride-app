@@ -17,7 +17,7 @@
           {{ header }}
         </th>
       </tr>
-      <tr ng-hide="isNa(data, selectedMetric)" ng-repeat="data in dataset | orderBy: setSort(selectedMetric) ">
+      <tr ng-repeat="data in dataset | orderBy: setSort(selectedMetric) ">
         <td>{{data.factoryname}}</td>
         <td>{{data.brand}}</td>
         <td ng-repeat="(key, val) in getSelectedMetric(data, selectedMetric) track by $index"

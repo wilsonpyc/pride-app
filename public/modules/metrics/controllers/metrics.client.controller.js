@@ -316,13 +316,120 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 					console.log($scope.dataset);
 				};
 
+				var setSupplyChainOrder = function(d){
+
+					for (var i = 0; i < d.length; i++){
+
+						var coalition = d[i].coalition;
+						var supplyChain = d[i].supplychain;
+
+						switch(coalition){
+								case 'Jeanswear':
+									d[i].coalitionOrder = 1;
+									switch(supplyChain){
+										case 'VFA':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'WJ':
+											d[i].supplyChainOrder = 2;
+										break;
+										case 'Int Mfg-America':
+											d[i].supplyChainOrder = 3;
+										break;
+										case 'Int Mfg-EU':
+											d[i].supplyChainOrder = 4;
+										break;
+										case 'EU-Sourced':
+											d[i].supplyChainOrder = 5;
+										break;
+									}
+								break;
+								case 'Imagewear':
+									d[i].coalitionOrder = 2;
+									switch(supplyChain){
+										case 'VFA':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'VFSLA':
+											d[i].supplyChainOrder = 2;
+										break;
+										case 'Domestic Contract':
+											d[i].supplyChainOrder = 3;
+										break;
+										case 'Int Mfg-America':
+											d[i].supplyChainOrder = 4;
+										break;
+									}
+								break;
+								case 'Outdoor':
+									d[i].coalitionOrder = 3;
+									switch(supplyChain){
+										case 'VFA':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'VFSLA':
+											d[i].supplyChainOrder = 2;
+										break;
+										case 'Int Mfg-America':
+											d[i].supplyChainOrder = 3;
+										break;
+										case 'EU':
+											d[i].supplyChainOrder = 4;
+										break;
+									}
+								break;
+								case 'Footwear':
+									d[i].coalitionOrder = 4;
+									switch(supplyChain){
+										case 'VFA':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'Int Mfg-DR':
+											d[i].supplyChainOrder = 2;
+										break;
+										case 'Sourced-DR':
+											d[i].supplyChainOrder = 3;
+										break;
+									}
+								break;
+								case 'Sportswear':
+									d[i].coalitionOrder = 5;
+									switch(supplyChain){
+										case 'VFA':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'VFSLA':
+											d[i].supplyChainOrder = 2;
+										break;
+										case 'EU':
+											d[i].supplyChainOrder = 3;
+										break;
+									}
+								break;
+								case 'Contemporary':
+									d[i].coalitionOrder = 6;
+									switch(supplyChain){
+										case 'Int Mfg-US Domestic':
+											d[i].supplyChainOrder = 1;
+										break;
+										case 'Sourced':
+											d[i].supplyChainOrder = 2;
+										break;
+									}
+								break;
+						}
+					}
+
+				};
+
 				combineData(datasets[0].data, datasets[1].data);
+				setSupplyChainOrder($scope.dataset);
 			});
 
 		};
 
 		$http.post('/report', $scope.selected).success(function(res){
-			console.log(res);
+			console.log('OK');
 		});
 
 		$scope.headers = {
@@ -389,7 +496,7 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 					} else if (metricValue <= riskThreshold) {
 						return 'btn-danger';
 					} else if (metricValue >= goodThreshold) {
-						if (countNotGood >= 0) {
+						if (countNotGood > 0) {
 							return 'btn-success withRisk';
 						} else {
 							return 'btn-success';
@@ -404,10 +511,10 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 				} else {
 					if (metricValue === 'N/A'){
 						return 'na';
-					} else if (metricValue >= riskThreshold) {
+					} else if (metricValue > riskThreshold) {
 						return 'btn-danger';
-					} else if (metricValue <= goodThreshold) {
-						if (countNotGood >= 0) {
+					} else if (metricValue < goodThreshold) {
+						if (countNotGood > 0) {
 							return 'btn-success withRisk';
 						} else {
 							return 'btn-success';
@@ -478,8 +585,8 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 					var metricValue = data.fitOqlRate.value;
 					var countNotGood = data.fitOqlRate.countNotGood;
 					var countRisk = data.fitOqlRate.countRisk;
-					var riskThreshold = 0;
-					var goodThreshold = 0;
+					var goodThreshold = 0.01;
+					var riskThreshold = 0.02;
 
 					switch (coalition) {
 						case 'Jeanswear':
@@ -495,7 +602,7 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 							riskThreshold = 0.02;
 					} //end of switch
 
-					var color = $scope.format.setColor(metricValue, countRisk, riskThreshold, goodThreshold, false);
+					var color = $scope.format.setColor(metricValue, countNotGood, countRisk, riskThreshold, goodThreshold, false);
 					return color;
 				},
 				dcMajorDefectsOqlRate: function(data){
@@ -829,7 +936,91 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 
 					var queryData = function(){
 						$http.put('/report/drilldown', selectedData).success(function(response){
-							$scope.dataset = response;
+
+							var removeNA = function(dataset, metric){
+								var d1 = [];  //cleaned dataset to be returned
+
+								dataset.forEach(function(d){
+									var val = '';
+
+									var filter = function(o, val){
+										//add item if not null or na but keep 0
+										if ( val !== 'N/A' && val || val === 0){
+											d1.push(o);
+										}
+
+									};
+
+									switch(metric){
+
+										case 'majorDefectsOqlRate':
+											val = d.metrics.factory.majorDefectsOql.val;
+											filter(d, val);
+											break;
+										case 'packagingOqlRate':
+											val = d.metrics.factory.packagingOql.val;
+											filter(d, val);
+											break;
+										case 'fitOqlRate':
+											val = d.metrics.factory.fitOql.val;
+											filter(d, val);
+											break;
+										case 'dcMajorDefectsOqlRate':
+											val = d.metrics.dc.majorDefectsOql.val;
+											filter(d, val);
+											break;
+										case 'dcPackagingOqlRate':
+											val = d.metrics.dc.packagingOql.val;
+											filter(d, val);
+											break;
+										case 'dcFitOqlRate':
+											val = d.metrics.dc.fitOql.val;
+											filter(d, val);
+											break;
+										case 'dcCustomizationRate':
+											val = d.metrics.dc.customization.val;
+											filter(d, val);
+											break;
+										case 'majorDefectsSqlRate':
+											val = d.metrics.factory.majorDefectsSql.val;
+											filter(d, val);
+											break;
+										case 'firstPassRate':
+											val = d.metrics.factory.firstPass.val;
+											filter(d, val);
+											break;
+										case 'processAuditScore':
+											val = d.metrics.factory.processAudit.score;
+											filter(d, val);
+											break;
+										case 'dcReworkTotal':
+											val = d.metrics.dc.rework.internalChargebacks;
+											filter(d, val);
+											break;
+										case 'dcInternalChargebacks':
+											val = d.metrics.dc.rework.internalChargebacks;
+											filter(d, val);
+											break;
+										case 'dcVasCompliance':
+											val = d.metrics.dc.vasCompliance;
+											filter(d, val);
+											break;
+										case 'dcWarrantyClaims':
+											val = d.metrics.dc.warrantyClaims;
+											filter(d, val);
+											break;
+										case 'dcKeyAccountsChargebacks':
+											val = d.metrics.dc.keyAccountsChargebacks;
+											filter(d, val);
+											break;
+									}
+
+								});
+
+								return d1;
+							};
+
+							$scope.dataset = removeNA(response, metric);
 							console.log($scope.dataset);
 						});
 					};
@@ -874,7 +1065,7 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 					//Potential refactoring with rootscope format object
 					$scope.format = {
 						percentage: function(data){
-							if(data === 'NA' || !data){
+							if(data === 'NA' ){
 								return '';
 							} else {
 								return (data*100).toFixed(2) + '%';
@@ -1357,16 +1548,6 @@ metricsApp.controller('MetricsReportController', ['$http','$scope', '$q', '$moda
 							default:
 								headers.push('Audited', 'Defects Found', getMetricTitle(selectedMetric));
 								return headers;
-						}
-					};
-
-					$scope.isNa = function(data, selectedMetric){
-						var d = data;
-						var sm = selectedMetric;
-						var v = $scope.getSelectedMetric(d, sm);
-
-						if ( v[v.length - 1] === 'NaN%' || !v[v.length - 1]){
-							return true;
 						}
 					};
 

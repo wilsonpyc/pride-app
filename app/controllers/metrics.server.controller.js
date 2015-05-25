@@ -335,15 +335,16 @@ exports.getReport = function(req, res) {
 exports.getCount = function(req, res) {
 	console.log('Counting...');
 
+	var match = {};
+	if (req.body.year){ match.year = req.body.year; }
+	if (req.body.month){ match.month = req.body.month; }
+	if (req.body.coalition){ match.coalition = req.body.coalition; }
+
 	Metric
 		.aggregate(
 			[
 				{
-					$match: {
-						year: req.body.year,
-						month: req.body.month,
-						coalition: req.body.coalition
-					}
+					$match: match
 				},
 				{ //Select fields
 					$project : {
@@ -445,9 +446,9 @@ exports.getCount = function(req, res) {
 						},
 						firstPassRate: {
 							$cond: {
-								if: { $eq: ['$firstPassAudited', 0] },
-								then: null,
-								else: {$divide: [ '$firstPassPassed', '$firstPassAudited']}
+								if: { $ne: ['$firstPassAudited', 0] },
+								then: {$divide: [ '$firstPassPassed', '$firstPassAudited']},
+								else: null
 							}
 						},
 						dcCustomizationRate: {
@@ -832,7 +833,16 @@ exports.getCount = function(req, res) {
 						},
 						firstPassRate_notGood:
 						{
-							$cond: { if: { $lte: [ '$firstPassRate', 0.95 ] }, then: 1, else: 0 }
+							$cond: {
+								if: {
+									$and: [
+										{$ne: ['$firstPassRate', null ]},
+										{$lt: ['$firstPassRate', 0.95 ]}
+									]
+								},
+								then: 1,
+								else: 0
+							}
 						},
 						processAuditScore_notGood:
 						{
@@ -1126,7 +1136,16 @@ exports.getCount = function(req, res) {
 						},
 						firstPassRate_risk:
 						{
-							$cond: { if: { $lte: [ '$firstPassRate', 0.89 ] }, then: 1, else: 0 }
+							$cond: {
+								if: {
+									$and: [
+										{$ne: ['$firstPassRate', null ]},
+										{$lte: ['$firstPassRate', 0.89 ]}
+									]
+								},
+								then: 1,
+								else: 0
+							}
 						},
 						processAuditScore_risk:
 						{
@@ -1489,14 +1508,17 @@ exports.getCount = function(req, res) {
 exports.drilldown = function(req, res){
 	console.log('Querying...');
 
+	var match = {
+		year: req.body.year,
+		month: req.body.month,
+		coalition: req.body.coalition,
+		supplychain: req.body.supplychain
+	};
+
 	Metric
 		.aggregate([
-			{ $match: {
-					year: req.body.year,
-					month: req.body.month,
-					coalition: req.body.coalition,
-					supplychain: req.body.supplychain
-				}
+			{
+				$match: match
 			},
 			{
 				$project: {
